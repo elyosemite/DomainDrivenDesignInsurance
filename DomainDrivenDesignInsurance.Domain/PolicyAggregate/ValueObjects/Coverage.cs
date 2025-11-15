@@ -12,7 +12,6 @@ public sealed class Coverage : IEquatable<Coverage>
     public Money SumInsured { get; }
     public decimal Rate { get; } // percent as 0.10 for 10%
 
-
     public Coverage(string coverageCode, string description, Money sumInsured, decimal rate)
     {
         CoverageCode = coverageCode ?? throw new ArgumentNullException(nameof(coverageCode));
@@ -22,13 +21,11 @@ public sealed class Coverage : IEquatable<Coverage>
         Rate = rate;
     }
 
-
     public Money CalculatePremium()
     {
         var premium = SumInsured.Amount * Rate;
         return new Money(premium, SumInsured.Currency);
     }
-
 
     public override bool Equals(object? obj) => Equals(obj as Coverage);
     public bool Equals(Coverage? other) => other is not null && CoverageCode == other.CoverageCode;

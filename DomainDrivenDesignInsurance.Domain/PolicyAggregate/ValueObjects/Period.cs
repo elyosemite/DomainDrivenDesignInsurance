@@ -8,7 +8,6 @@ public sealed class Period : IEquatable<Period>
     public DateTime From { get; }
     public DateTime To { get; }
 
-
     public Period(DateTime from, DateTime to)
     {
         if (to <= from) throw new ArgumentException("Period 'to' must be after 'from'");

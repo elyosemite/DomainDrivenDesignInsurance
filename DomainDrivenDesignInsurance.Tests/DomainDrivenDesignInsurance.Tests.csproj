@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DomainDrivenDesignInsurance.Domain\DomainDrivenDesignInsurance.Domain.csproj" />
+    <ProjectReference Include="..\DomainDrivenDesignInsurance.Infrastructure\DomainDrivenDesignInsurance.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,11 +21,9 @@ public class Policy : IAggregateRoot
     private readonly List<Coverage> _coverages = new();
     public IReadOnlyCollection<Coverage> Coverages => new ReadOnlyCollection<Coverage>(_coverages);
 
-
     // Endorsements as entities within aggregate
     private readonly List<Endorsement> _endorsements = new();
     public IReadOnlyCollection<Endorsement> Endorsements => new ReadOnlyCollection<Endorsement>(_endorsements);
-
 
     // Domain events attached to this aggregate instance
     private readonly List<DomainEvent> _domainEvents = new();
@@ -37,7 +35,6 @@ public class Policy : IAggregateRoot
         if (period == null) throw new ArgumentNullException(nameof(period));
         if (coverages == null || !coverages.Any()) throw new ArgumentException("Policy must have at least one coverage", nameof(coverages));
 
-
         var p = new Policy
         {
             Id = id == Guid.Empty ? Guid.NewGuid() : id,
@@ -47,17 +44,13 @@ public class Policy : IAggregateRoot
             Period = period
         };
 
-
         p._coverages.AddRange(coverages);
-
 
         // raise domain event
         p.AddDomainEvent(new PolicyIssued(p.Id, p.InsuredId, p.BrokerId));
 
-
         return p;
     }
-
 
     public Money CalculateTotalPremium()
     {
@@ -72,29 +65,22 @@ public class Policy : IAggregateRoot
         if (Status != PolicyStatus.Active)
             throw new InvalidOperationException("Only active policies can receive endorsements");
 
-
         if (!Period.Includes(effectiveDate))
             throw new InvalidOperationException("Endorsement effective date must be within policy period");
 
-
         // more invariants (e.g., endorsement overlaps) can be added here
-
 
         var endorsement = new Endorsement(type, effectiveDate, premiumDelta);
         _endorsements.Add(endorsement);
-
 
         // apply premium change to the policy as side-effect (if domain requires)
         // note: in this domain object we keep premium calculation based on coverages, but
         // you might store an aggregated premium state and update it here.
 
-
         AddDomainEvent(new EndorsementCreated(Id, endorsement.Id, InsuredId, type, premiumDelta.Amount));
-
 
         return endorsement;
     }
-
 
     public void AddCoverage(Coverage coverage)
     {
@@ -108,7 +94,6 @@ public class Policy : IAggregateRoot
         Status = PolicyStatus.Cancelled;
         AddDomainEvent(new PolicyCancelled(Id, reason));
     }
-
 
     // Domain Events helpers
     private void AddDomainEvent(DomainEvent @event) => _domainEvents.Add(@event);

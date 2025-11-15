@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="DomainDrivenDesignInsurance.Application/DomainDrivenDesignInsurance.Application.csproj" Id="27d472fe-9a92-40a5-a853-cbcf69b9a0d9" />
   <Project Path="DomainDrivenDesignInsurance.Domain/DomainDrivenDesignInsurance.Domain.csproj" />
+  <Project Path="DomainDrivenDesignInsurance.Infrastructure/DomainDrivenDesignInsurance.Infrastructure.csproj" Id="06ffba2e-2610-4300-988b-c7ee2aa2c47c" />
   <Project Path="DomainDrivenDesignInsurance.Tests/DomainDrivenDesignInsurance.Tests.csproj" Id="3db37015-3624-42b4-aa80-9af3721901d8" />
 </Solution>
