@@ -3,7 +3,7 @@
 /// <summary>
 /// Period value object - validity interval
 /// </summary>
-public sealed class Period : IEquatable<Period>
+public class Period : IEquatable<Period>
 {
     public DateTime From { get; }
     public DateTime To { get; }
@@ -21,4 +21,16 @@ public sealed class Period : IEquatable<Period>
     public override bool Equals(object? obj) => Equals(obj as Period);
     public bool Equals(Period? other) => other is not null && From == other.From && To == other.To;
     public override int GetHashCode() => HashCode.Combine(From, To);
+}
+
+/// <summary>
+/// Null Object Pattern for Period
+/// </summary>
+public class NullObjectPeriod : Period
+{
+    private static readonly NullObjectPeriod _instance = new NullObjectPeriod();
+
+    private NullObjectPeriod() : base(DateTime.MinValue, DateTime.MinValue) { }
+
+    public static NullObjectPeriod Instance => _instance;
 }
