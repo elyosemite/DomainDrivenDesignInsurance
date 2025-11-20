@@ -1,6 +1,3 @@
 ﻿namespace DomainDrivenDesignInsurance.Domain;
 
-public interface IAggregateRoot
-{
-
-}
+public interface IAggregateRoot : IEntity { }
