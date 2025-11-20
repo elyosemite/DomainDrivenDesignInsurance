@@ -15,7 +15,7 @@ public class Policy : IAggregateRoot
     public Guid InsuredId { get; private set; }
     public Guid BrokerId { get; private set; }
     public PolicyStatus Status { get; private set; }
-    public Period Period { get; private set; }
+    public Period Period { get; private set; } = NullObjectPeriod.Instance;
 
     // Value objects
     private readonly List<Coverage> _coverages = new();
