@@ -1,6 +1,6 @@
 @DomainDrivenDesignInsurance.API_HostAddress = http://localhost:5259
 
-GET {DomainDrivenDesignInsurance.API_HostAddress}/weatherforecast/
+GET {{DomainDrivenDesignInsurance.API_HostAddress}}/policy/
 Accept: application/json
 
 ###
