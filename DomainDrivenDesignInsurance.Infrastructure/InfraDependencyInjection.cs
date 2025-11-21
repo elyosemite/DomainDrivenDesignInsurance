@@ -8,7 +8,7 @@ public static class InfrastructureDependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddTransient<IPolicyRepository, PolicyRepositoryInMemory>();
+        services.AddSingleton<IPolicyRepository, PolicyRepositoryInMemory>();
         return services;
     }
 }

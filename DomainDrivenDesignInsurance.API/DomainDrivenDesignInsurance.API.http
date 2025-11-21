@@ -13,3 +13,7 @@ Content-Type: application/json
     "endDate": "2025-07-01",
     "value": 5000
 }
+
+###
+GET {{DomainDrivenDesignInsuranceAPI_HostAddress}}/v1/api/policy?policyId=f7b9ad73-19a3-4fef-8ae0-5f79e4d77da3
+Accept: application/json

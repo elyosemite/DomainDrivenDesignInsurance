@@ -22,11 +22,11 @@ public class IssuePolicyCommandResponse
     public decimal TotalPremium { get; set; }
 }
 
-public class IssuePolicyHandler : ICommandHandler<IssuePolicyCommandRequest, IssuePolicyCommandResponse>
+public class IssuePolicyCommandHandler : ICommandHandler<IssuePolicyCommandRequest, IssuePolicyCommandResponse>
 {
     private readonly IPolicyRepository _policyRepository;
 
-    public IssuePolicyHandler(IPolicyRepository policyRepository)
+    public IssuePolicyCommandHandler(IPolicyRepository policyRepository)
     {
         _policyRepository = policyRepository;
     }

@@ -76,8 +76,9 @@ public class Policy : IAggregateRoot
             Status = PolicyStatus.Active,
             Period = period
         };
-
-        policy._coverages.AddRange(coverages);
+        
+        policy.AddCoverageRange(coverages);
+        policy.TotalPremium = policy.CalculateTotalPremium();
 
         policy.AddDomainEvent(new PolicyIssued(policy.Id, policy.InsuredId, policy.BrokerId));
 
