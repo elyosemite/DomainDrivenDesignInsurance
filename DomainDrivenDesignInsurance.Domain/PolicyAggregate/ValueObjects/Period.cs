@@ -10,7 +10,7 @@ public class Period : IEquatable<Period>
 
     public Period(DateTime from, DateTime to)
     {
-        if (to <= from) throw new ArgumentException("Period 'to' must be after 'from'");
+        if (from > to) throw new ArgumentException("Period 'to' must be after 'from'");
         From = from;
         To = to;
     }

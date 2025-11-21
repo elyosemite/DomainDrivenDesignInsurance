@@ -9,6 +9,10 @@ public sealed class Coverage : IEquatable<Coverage>
 {
     public string CoverageCode { get; }
     public string Description { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public Money SumInsured { get; }
     public decimal Rate { get; } // percent as 0.10 for 10%
 
