@@ -7,16 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mediator.Abstractions" Version="3.0.*" />
-    <PackageReference Include="Mediator.SourceGenerator" Version="3.0.*">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="DomainDrivenDesignInsurance.API.csproj" />
+    <ProjectReference Include="..\DomainDrivenDesignInsurance.Application\DomainDrivenDesignInsurance.Application.csproj" />
+    <ProjectReference Include="..\DomainDrivenDesignInsurance.Infrastructure\DomainDrivenDesignInsurance.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

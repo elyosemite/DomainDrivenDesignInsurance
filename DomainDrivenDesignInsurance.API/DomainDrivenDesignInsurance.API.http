@@ -1,6 +1,15 @@
-@DomainDrivenDesignInsurance.API_HostAddress = http://localhost:5259
+@DomainDrivenDesignInsuranceAPI_HostAddress = http://localhost:5259
 
-GET {{DomainDrivenDesignInsurance.API_HostAddress}}/policy/
+GET {{DomainDrivenDesignInsuranceAPI_HostAddress}}/v1/api/policy/
 Accept: application/json
 
 ###
+POST {{DomainDrivenDesignInsuranceAPI_HostAddress}}/v1/api/policy/
+Content-Type: application/json
+
+{
+    "policyHolderName": "John Doe",
+    "startDate": "2024-07-01",
+    "endDate": "2025-07-01",
+    "value": 5000
+}
