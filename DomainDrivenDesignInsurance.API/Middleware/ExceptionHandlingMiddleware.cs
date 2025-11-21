@@ -1,5 +1,4 @@
 using DomainDrivenDesignInsurance.Domain.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace DomainDrivenDesignInsurance.API.Middleware;
 
@@ -19,20 +18,12 @@ public class ExceptionHandlingMiddleware
         try
         {
             await _next(context);
-        }
+        } 
         catch(Exception exception)
         {
             _logger.LogError(exception, "An unhandled exception occurred.");
 
-            var problemDetails = new ProblemDetails
-            {
-                Status = StatusCodes.Status500InternalServerError,
-                Title = "Server Error"
-            };
-
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-
-            await context.Response.WriteAsJsonAsync(problemDetails);
+            await HandleExceptionAsync(context, exception);
         }
     }
 
