@@ -6,6 +6,7 @@ public class PolicyModel
     public Guid InsuredId { get; set; }
     public Guid BrokerId { get; set; }
     public int Status { get; set; }
+    public string placeHolderName { get; set; }
 
     // Period
     public DateTime PeriodFrom { get; set; }

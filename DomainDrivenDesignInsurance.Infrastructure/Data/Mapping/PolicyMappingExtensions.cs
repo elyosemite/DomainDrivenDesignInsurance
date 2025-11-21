@@ -26,6 +26,7 @@ public static class PolicyMappingExtensions
         var policy = Policy.Issue(
             model.Id,
             model.InsuredId,
+            model.placeHolderName,
             model.BrokerId,
             new Period(model.PeriodFrom, model.PeriodTo),
             model.Coverages.Select(c => c.ToDomain())
