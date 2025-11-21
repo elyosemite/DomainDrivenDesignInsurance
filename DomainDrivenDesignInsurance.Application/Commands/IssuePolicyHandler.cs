@@ -18,6 +18,7 @@ public class IssuePolicyCommandRequest : ICommand<IssuePolicyCommandResponse>
 public class IssuePolicyCommandResponse
 {
     public Guid PolicyId { get; set; }
+    public string PolicyHolderName { get; set; } = string.Empty;
 }
 
 public class IssuePolicyHandler : ICommandHandler<IssuePolicyCommandRequest, IssuePolicyCommandResponse>
@@ -58,7 +59,8 @@ public class IssuePolicyHandler : ICommandHandler<IssuePolicyCommandRequest, Iss
 
         return new IssuePolicyCommandResponse
         {
-            PolicyId = policy.Id
+            PolicyId = policy.Id,
+            PolicyHolderName = policy.PolicyHolderName
         };
     }
 }
