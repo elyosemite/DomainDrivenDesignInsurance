@@ -19,6 +19,7 @@ public class IssuePolicyCommandResponse
 {
     public Guid PolicyId { get; set; }
     public string PolicyHolderName { get; set; } = string.Empty;
+    public decimal TotalPremium { get; set; }
 }
 
 public class IssuePolicyHandler : ICommandHandler<IssuePolicyCommandRequest, IssuePolicyCommandResponse>
@@ -60,7 +61,8 @@ public class IssuePolicyHandler : ICommandHandler<IssuePolicyCommandRequest, Iss
         return new IssuePolicyCommandResponse
         {
             PolicyId = policy.Id,
-            PolicyHolderName = policy.PolicyHolderName
+            PolicyHolderName = policy.PolicyHolderName,
+            TotalPremium = policy.TotalPremium.Amount
         };
     }
 }

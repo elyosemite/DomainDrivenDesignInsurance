@@ -1,4 +1,5 @@
-﻿using DomainDrivenDesignInsurance.Domain.PolicyAggregate.DomainEvents;
+﻿using DomainDrivenDesignInsurance.Domain.Exceptions;
+using DomainDrivenDesignInsurance.Domain.PolicyAggregate.DomainEvents;
 using DomainDrivenDesignInsurance.Domain.PolicyAggregate.Enums;
 using DomainDrivenDesignInsurance.Domain.PolicyAggregate.ValueObjects;
 using DomainDrivenDesignInsurance.Domain.ValueObject;
@@ -17,6 +18,7 @@ public class Policy : IAggregateRoot
     public Guid BrokerId { get; private set; }
     public PolicyStatus Status { get; private set; }
     public Period Period { get; private set; } = NullObjectPeriod.Instance;
+    public Money TotalPremium { get; private set; } = NullMoney.Instance;
 
     // Value objects
     private readonly List<Coverage> _coverages = new();
@@ -47,7 +49,8 @@ public class Policy : IAggregateRoot
             Period = period
         };
 
-        p._coverages.AddRange(coverages);
+        p.AddCoverageRange(coverages);
+        p.TotalPremium = p.CalculateTotalPremium();
 
         // raise domain event
         p.AddDomainEvent(new PolicyIssued(p.Id, p.InsuredId, p.BrokerId));
@@ -84,8 +87,13 @@ public class Policy : IAggregateRoot
     public Money CalculateTotalPremium()
     {
         var subtotal = _coverages.Select(c => c.CalculatePremium().Amount).Sum();
-        // example: no taxes in domain object
-        return new Money(subtotal, _coverages.First().SumInsured.Currency);
+
+        if (_coverages.Count <= 0) throw new InvalidCoverageException("Cannot calculate premium for a policy with no coverages. It is recommended to add at least one coverage.");
+        if (subtotal <= 0) throw new PremiumCalculationViolationException("Calculated premium cannot be zero or negative. Please review coverages and their sum insured amounts.");
+
+        TotalPremium = new Money(subtotal, _coverages.First().SumInsured.Currency);
+
+        return TotalPremium;
     }
 
     // Business operation: create an endorsement
@@ -115,6 +123,12 @@ public class Policy : IAggregateRoot
     {
         if (coverage == null) throw new ArgumentNullException(nameof(coverage));
         _coverages.Add(coverage);
+    }
+
+    public void AddCoverageRange(IEnumerable<Coverage> coverages)
+    {
+        if (coverages == null || !coverages.Any()) throw new ArgumentException("Coverages collection cannot be null or empty", nameof(coverages));
+        _coverages.AddRange(coverages);
     }
 
     public void Cancel(string reason)
