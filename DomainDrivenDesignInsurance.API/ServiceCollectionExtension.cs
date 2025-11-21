@@ -1,3 +1,4 @@
+using DomainDrivenDesignInsurance.API.Middleware;
 using DomainDrivenDesignInsurance.Application;
 using DomainDrivenDesignInsurance.Infrastructure;
 using FastEndpoints;
@@ -15,6 +16,8 @@ public static class ServiceCollectionExtension
         services.SwaggerDocument();
         services.AddOpenApi();
         services.AddAuthorization();
+
+        services.AddProblemDetails();
         return services;
     }
 
@@ -24,6 +27,10 @@ public static class ServiceCollectionExtension
         app.UseFastEndpoints();
         app.UseSwaggerGen();
         app.MapOpenApi();
+
+
+        // Middlewares
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
         return app;
     }
 }
