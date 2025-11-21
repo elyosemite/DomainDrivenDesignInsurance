@@ -14,11 +14,13 @@ public static class ServiceCollectionExtension
         services.AddFastEndpoints();
         services.SwaggerDocument();
         services.AddOpenApi();
+        services.AddAuthorization();
         return services;
     }
 
     public static WebApplication UseApi(this WebApplication app)
     {
+        app.UseAuthorization();
         app.UseFastEndpoints();
         app.UseSwaggerGen();
         app.MapOpenApi();

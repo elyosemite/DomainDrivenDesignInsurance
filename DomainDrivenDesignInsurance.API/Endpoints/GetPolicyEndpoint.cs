@@ -10,9 +10,7 @@ public sealed record GetPolicyByIdRequest
     public Guid PolicyId { get; set; }
 }
 
-public sealed record GetPolicyByIdResponse(Guid PolicyId, string PolicyHolderName, decimal Premium);
-
-public class GetPolicyByIdQueryEndpoint : Endpoint<GetPolicyByIdRequest, GetPolicyByIdResponse>
+public class GetPolicyByIdQueryEndpoint : Endpoint<GetPolicyByIdRequest, GetPolicyByIdQueryResponse>
 {
     private readonly IMediator _mediator;
 
@@ -24,6 +22,7 @@ public class GetPolicyByIdQueryEndpoint : Endpoint<GetPolicyByIdRequest, GetPoli
     public override void Configure()
     {
         Get("/v1/api/policy");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(GetPolicyByIdRequest req, CancellationToken ct)
@@ -39,12 +38,7 @@ public class GetPolicyByIdQueryEndpoint : Endpoint<GetPolicyByIdRequest, GetPoli
                 return;
             }
 
-            var result = new GetPolicyByIdResponse(
-                response.PolicyId,
-                response.PolicyHolderName,
-                response.TotalPremiumAmount);
-
-            await Send.OkAsync(result, ct);
+            await Send.OkAsync(response, ct);
         }
         catch (Exception)
         {
