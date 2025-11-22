@@ -30,7 +30,13 @@ public static class ServiceCollectionExtension
 
 
         // Middlewares
-        app.UseMiddleware<ExceptionHandlingMiddleware>();
+        app.UseExceptionHandlingMiddleware();
         return app;
+    }
+  
+    public static IApplicationBuilder UseExceptionHandlingMiddleware(
+        this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<ExceptionHandlingMiddleware>();
     }
 }
