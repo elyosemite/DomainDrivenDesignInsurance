@@ -42,6 +42,8 @@ public static class GlobalExceptionHandlerExtensions
         service.AddExceptionHandler<GlobalExceptionHandler>();
         service.AddExceptionHandler<BadRequestExceptionHandler>();
         service.AddExceptionHandler<NotFoundExceptionHandler>();
+        service.AddExceptionHandler<InvalidPeriodPolicyExceptionHandler>();
+        service.AddExceptionHandler<InvalidInsuredNameExceptionHandler>();
         return service;
     }
 

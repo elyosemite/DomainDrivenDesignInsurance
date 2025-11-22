@@ -14,7 +14,7 @@ public class Policy : IAggregateRoot
 {
     public Guid Id { get; private set; }
     public Guid InsuredId { get; private set; }
-    public string PolicyHolderName { get; private set; } = string.Empty;
+    public string InsuredName { get; private set; } = string.Empty;
     public Guid BrokerId { get; private set; }
     public PolicyStatus Status { get; private set; }
     public Period Period { get; private set; } = NullObjectPeriod.Instance;
@@ -33,15 +33,15 @@ public class Policy : IAggregateRoot
     public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     // Factory for creating a new policy from a quotation or issuance
-    public static Policy Issue(Guid id, Guid insuredId, string placeHolderName, Guid brokerId, Period period, IEnumerable<Coverage> coverages)
+    public static Policy Issue(Guid id, Guid insuredId, string insuredName, Guid brokerId, Period period, IEnumerable<Coverage> coverages)
     {
-        if (string.IsNullOrWhiteSpace(placeHolderName)) throw new ArgumentNullException(nameof(placeHolderName));
-        if (period == null) throw new InvalidPeriodPolicyException(nameof(period));
-        if (coverages == null || !coverages.Any()) throw new EmptyCoverageException("Policy must have at least one coverage");
+        if (string.IsNullOrWhiteSpace(insuredName)) throw new InvalidInsuredNameException();
+        if (period == null) throw new InvalidPeriodPolicyException();
+        if (coverages == null || !coverages.Any()) throw new EmptyCoverageException();
 
         var p = new Policy
         {
-            PolicyHolderName = placeHolderName,
+            InsuredName = insuredName,
             Id = id == Guid.Empty ? Guid.NewGuid() : id,
             InsuredId = insuredId,
             BrokerId = brokerId,
@@ -59,9 +59,9 @@ public class Policy : IAggregateRoot
     }
 
     // Factory overload for simpler policy issuance
-    public static Policy Issue(Guid insuredId, string policyHolderName, Guid brokerId, Period period, IEnumerable<Coverage> coverages)
+    public static Policy Issue(Guid insuredId, string insuredName, Guid brokerId, Period period, IEnumerable<Coverage> coverages)
     {
-        if (string.IsNullOrWhiteSpace(policyHolderName)) throw new ArgumentNullException(nameof(policyHolderName));
+        if (string.IsNullOrWhiteSpace(insuredName)) throw new ArgumentNullException(nameof(insuredName));
         if (period == null) throw new ArgumentNullException(nameof(period));
         if (coverages == null || !coverages.Any()) throw new ArgumentException("Policy must have at least one coverage", nameof(coverages));
 
@@ -69,7 +69,7 @@ public class Policy : IAggregateRoot
 
         var policy = new Policy
         {
-            PolicyHolderName = policyHolderName,
+            InsuredName = insuredName,
             Id = id,
             InsuredId = insuredId,
             BrokerId = brokerId,
