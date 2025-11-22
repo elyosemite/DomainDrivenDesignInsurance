@@ -33,7 +33,6 @@ public class IssuePolicyEndpoint : Endpoint<IssuePolicyCommandRequest, IssuePoli
         }
         catch (Exception)
         {
-            //await Send.NotFoundAsync(ct);
             throw;
         }
     }
