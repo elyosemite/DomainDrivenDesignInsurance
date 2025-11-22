@@ -69,9 +69,7 @@ public class ProblemDetailsMiddleware
             }
         };
 
-        // Add trace ID for debugging
         problemDetails.Extensions["traceId"] = context.TraceIdentifier;
-
         context.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status500InternalServerError;
         context.Response.ContentType = "application/problem+json";
         
