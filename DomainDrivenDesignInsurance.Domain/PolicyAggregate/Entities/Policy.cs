@@ -36,7 +36,7 @@ public class Policy : IAggregateRoot
     public static Policy Issue(Guid id, Guid insuredId, string placeHolderName, Guid brokerId, Period period, IEnumerable<Coverage> coverages)
     {
         if (string.IsNullOrWhiteSpace(placeHolderName)) throw new ArgumentNullException(nameof(placeHolderName));
-        if (period == null) throw new ArgumentNullException(nameof(period));
+        if (period == null) throw new InvalidPeriodPolicyException(nameof(period));
         if (coverages == null || !coverages.Any()) throw new ArgumentException("Policy must have at least one coverage", nameof(coverages));
 
         var p = new Policy
