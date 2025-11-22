@@ -9,7 +9,7 @@ namespace DomainDrivenDesignInsurance.Application.Commands;
 public class IssuePolicyCommandRequest : ICommand<IssuePolicyCommandResponse>
 {
     public Guid PolicyId { get; set; }
-    public string PolicyHolderName { get; set; } = string.Empty;
+    public string InsuredName { get; set; } = string.Empty;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public decimal Value { get; set; }
@@ -18,7 +18,7 @@ public class IssuePolicyCommandRequest : ICommand<IssuePolicyCommandResponse>
 public class IssuePolicyCommandResponse
 {
     public Guid PolicyId { get; set; }
-    public string PolicyHolderName { get; set; } = string.Empty;
+    public string InsuredName { get; set; } = string.Empty;
     public decimal TotalPremium { get; set; }
 }
 
@@ -50,7 +50,7 @@ public class IssuePolicyCommandHandler : ICommandHandler<IssuePolicyCommandReque
 
         var policy = Policy.Issue(
             insuredId,
-            request.PolicyHolderName,
+            request.InsuredName,
             brokerId,
             period,
             coverages
@@ -61,7 +61,7 @@ public class IssuePolicyCommandHandler : ICommandHandler<IssuePolicyCommandReque
         return new IssuePolicyCommandResponse
         {
             PolicyId = policy.Id,
-            PolicyHolderName = policy.PolicyHolderName,
+            InsuredName = policy.InsuredName,
             TotalPremium = policy.TotalPremium.Amount
         };
     }

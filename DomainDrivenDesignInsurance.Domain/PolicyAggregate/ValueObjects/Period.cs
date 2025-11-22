@@ -1,4 +1,6 @@
-﻿namespace DomainDrivenDesignInsurance.Domain.PolicyAggregate.ValueObjects;
+﻿using DomainDrivenDesignInsurance.Domain.Exceptions;
+
+namespace DomainDrivenDesignInsurance.Domain.PolicyAggregate.ValueObjects;
 
 /// <summary>
 /// Period value object - validity interval
@@ -10,7 +12,7 @@ public class Period : IEquatable<Period>
 
     public Period(DateTime from, DateTime to)
     {
-        if (from > to) throw new ArgumentException("Period 'to' must be after 'from'");
+        if (from > to) throw new InvalidPeriodPolicyException();
         From = from;
         To = to;
     }

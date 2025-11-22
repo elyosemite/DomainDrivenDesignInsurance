@@ -6,7 +6,7 @@ namespace DomainDrivenDesignInsurance.Application.Queries;
 public sealed record GetPolicyByIdQueryRequest(Guid PolicyId) : IQuery<GetPolicyByIdQueryResponse>;
 public sealed record GetPolicyByIdQueryResponse(
     Guid PolicyId,
-    string PolicyHolderName,
+    string InsuredName,
     string Status,
     decimal TotalPremiumAmount,
     string TotalPremiumCurrency
@@ -31,7 +31,7 @@ public sealed class GetPolicyQueryHandler : IQueryHandler<GetPolicyByIdQueryRequ
 
         return new GetPolicyByIdQueryResponse(
             policy.Id,
-            policy.PolicyHolderName,
+            policy.InsuredName,
             policy.Status.ToString(),
             policy.TotalPremium.Amount,
             policy.TotalPremium.Currency

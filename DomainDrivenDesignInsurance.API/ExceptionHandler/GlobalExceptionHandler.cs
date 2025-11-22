@@ -39,11 +39,11 @@ public static class GlobalExceptionHandlerExtensions
     public static IServiceCollection AddGlobalExceptionHandler(
         this IServiceCollection service)
     {
-        service.AddExceptionHandler<GlobalExceptionHandler>();
         service.AddExceptionHandler<BadRequestExceptionHandler>();
         service.AddExceptionHandler<NotFoundExceptionHandler>();
         service.AddExceptionHandler<InvalidPeriodPolicyExceptionHandler>();
         service.AddExceptionHandler<InvalidInsuredNameExceptionHandler>();
+        service.AddExceptionHandler<GlobalExceptionHandler>();
         return service;
     }
 
