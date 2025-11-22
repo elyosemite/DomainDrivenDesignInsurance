@@ -35,6 +35,7 @@ public class GlobalExceptionHandlingMiddleware
 
         var response = exception switch
         {
+            PremiumCalculationViolationException premiumEx => new ErrorDetails(StatusCodes.Status400BadRequest, "Premium calculation error", premiumEx.Errors),
             ValidationException validationEx => new ErrorDetails(StatusCodes.Status400BadRequest, "Validation failed", validationEx.Errors),
             NotFoundException notFoundEx => new ErrorDetails(StatusCodes.Status404NotFound, "Validation failed", notFoundEx.Errors),            
             UnauthorizedException unauthorizedException => new ErrorDetails(StatusCodes.Status401Unauthorized, "Unauthorized access", unauthorizedException.Errors),

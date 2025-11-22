@@ -1,11 +1,7 @@
 namespace DomainDrivenDesignInsurance.Domain.Exceptions;
 
-public class PremiumCalculationViolationException : Exception
+public class PremiumCalculationViolationException : DomainException
 {
-    public PremiumCalculationViolationException()
-    {
-    }
-
     public PremiumCalculationViolationException(string message)
         : base(message)
     {

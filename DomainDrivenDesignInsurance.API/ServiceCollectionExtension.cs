@@ -17,7 +17,7 @@ public static class ServiceCollectionExtension
         services.AddOpenApi();
         services.AddAuthorization();
 
-        services.AddProblemDetails();
+        //services.AddProblemDetails();
         return services;
     }
 
@@ -28,8 +28,7 @@ public static class ServiceCollectionExtension
         app.UseSwaggerGen();
         app.MapOpenApi();
 
-
-        // Middlewares
+        // Custom Middlewares
         app.UseExceptionHandlingMiddleware();
         return app;
     }
@@ -38,8 +37,8 @@ public static class ServiceCollectionExtension
         this IApplicationBuilder builder)
     {
         return builder
-            .UseGlobalExceptionHandlingMiddleware()
-            .UseProblemDetailsMiddleware()
-            .UseEnrichedExceptionHandlerMiddleware();
+            .UseGlobalExceptionHandlingMiddleware();
+            //.UseProblemDetailsMiddleware()
+            //.UseEnrichedExceptionHandlerMiddleware();
     }
 }
