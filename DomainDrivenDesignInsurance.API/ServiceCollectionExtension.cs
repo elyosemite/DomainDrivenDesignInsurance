@@ -38,8 +38,8 @@ public static class ServiceCollectionExtension
         this IApplicationBuilder builder)
     {
         return builder
-            .UseMiddleware<GlobalExceptionHandlingMiddleware>()
-            .UseMiddleware<ProblemDetailsMiddleware>()
-            .UseMiddleware<EnrichedExceptionHandlerMiddleware>();
+            .UseGlobalExceptionHandlingMiddleware()
+            .UseProblemDetailsMiddleware()
+            .UseEnrichedExceptionHandlerMiddleware();
     }
 }

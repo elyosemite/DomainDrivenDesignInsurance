@@ -93,3 +93,12 @@ public class EnrichedExceptionHandlerMiddleware
         // Handle exception response
     }
 }
+
+public static class EnrichedExceptionHandlerMiddlewareExtensions
+{
+    public static IApplicationBuilder UseEnrichedExceptionHandlerMiddleware(
+        this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<EnrichedExceptionHandlerMiddleware>();
+    }
+}

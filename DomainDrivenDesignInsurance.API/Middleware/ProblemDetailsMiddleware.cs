@@ -78,3 +78,12 @@ public class ProblemDetailsMiddleware
         await context.Response.WriteAsJsonAsync(problemDetails);
     }
 }
+
+public static class ProblemDetailsMiddlewareExtensions
+{
+    public static IApplicationBuilder UseProblemDetailsMiddleware(
+        this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<ProblemDetailsMiddleware>();
+    }
+}
