@@ -37,6 +37,9 @@ public static class ServiceCollectionExtension
     public static IApplicationBuilder UseExceptionHandlingMiddleware(
         this IApplicationBuilder builder)
     {
-        return builder.UseMiddleware<ExceptionHandlingMiddleware>();
+        return builder
+            .UseMiddleware<GlobalExceptionHandlingMiddleware>()
+            .UseMiddleware<ProblemDetailsMiddleware>()
+            .UseMiddleware<EnrichedExceptionHandlerMiddleware>();
     }
 }
