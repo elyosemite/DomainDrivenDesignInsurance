@@ -2,12 +2,12 @@ using DomainDrivenDesignInsurance.Domain.Exceptions;
 
 namespace DomainDrivenDesignInsurance.API.Middleware;
 
-public class ExceptionHandlingMiddleware
+public class GlobalExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    private readonly ILogger<GlobalExceptionHandlingMiddleware> _logger;
 
-    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+    public GlobalExceptionHandlingMiddleware(RequestDelegate next, ILogger<GlobalExceptionHandlingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
