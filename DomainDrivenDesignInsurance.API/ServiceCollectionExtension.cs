@@ -1,3 +1,4 @@
+using DomainDrivenDesignInsurance.API.ExceptionHandler;
 using DomainDrivenDesignInsurance.API.Middleware;
 using DomainDrivenDesignInsurance.Application;
 using DomainDrivenDesignInsurance.Infrastructure;
@@ -18,6 +19,7 @@ public static class ServiceCollectionExtension
         services.AddAuthorization();
 
         services.AddProblemDetails();
+        services.AddGlobalExceptionHandler();
         return services;
     }
 
@@ -29,7 +31,8 @@ public static class ServiceCollectionExtension
         app.MapOpenApi();
 
         // Custom Middlewares
-        app.UseExceptionHandlingMiddleware();
+        app.UseGlobalExceptionHandler();
+        // app.UseExceptionHandlingMiddleware();
         return app;
     }
   

@@ -40,6 +40,8 @@ public static class GlobalExceptionHandlerExtensions
         this IServiceCollection service)
     {
         service.AddExceptionHandler<GlobalExceptionHandler>();
+        service.AddExceptionHandler<BadRequestExceptionHandler>();
+        service.AddExceptionHandler<NotFoundExceptionHandler>();
         return service;
     }
 
