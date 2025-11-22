@@ -40,6 +40,7 @@ public class GlobalExceptionHandlingMiddleware
             NotFoundException notFoundEx => new ErrorDetails(StatusCodes.Status404NotFound, "Validation failed", notFoundEx.Errors),            
             UnauthorizedException unauthorizedException => new ErrorDetails(StatusCodes.Status401Unauthorized, "Unauthorized access", unauthorizedException.Errors),
             ForbiddenException forbiddenException => new ErrorDetails(StatusCodes.Status403Forbidden, "Access forbidden", forbiddenException.Errors),
+            InvalidPeriodPolicyException invalidPeriodEx => new ErrorDetails(StatusCodes.Status400BadRequest, invalidPeriodEx.Message, invalidPeriodEx.Errors),
             _ => new ErrorDetails(StatusCodes.Status500InternalServerError, "An internal server error occurred", null)
         };
 
