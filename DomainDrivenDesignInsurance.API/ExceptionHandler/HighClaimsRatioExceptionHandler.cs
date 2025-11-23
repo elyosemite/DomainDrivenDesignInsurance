@@ -35,8 +35,7 @@ public sealed class HighClaimsRatioExceptionHandler : IExceptionHandler
         {
             Title = "High Claims Ratio",
             Detail = $"The claims ratio for policy {highClaimsRatioException.PolicyNumber} is {highClaimsRatioException.ClaimsRatio:P}, which exceeds the acceptable limit.",
-            Status = StatusCodes.Status400BadRequest,
-            Type = "https://example.com/probs/high-claims-ratio"
+            Status = StatusCodes.Status400BadRequest
         };
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
