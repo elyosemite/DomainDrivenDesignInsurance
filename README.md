@@ -1,6 +1,6 @@
 # DomainDrivenDesignInsurance
 
-DomainDrivenDesignInsurance is a sample project designed to teach software architects and engineers about Domain-Driven Design (DDD) principles within the insurance domain. This project demonstrates how to apply DDD concepts to model complex business logic and workflows commonly found in insurance systems.
+DomainDrivenDesignInsurance is a sample project designed to teach software architects and engineers about Domain-Driven Design (DDD) principles within the insurance domain. This project demonstrates how to apply DDD concepts to model complex business logic and workflows commonly found in insurance systems. In this repository I'm showing different aspects and patterns around Domain-Driven Design from the basic to advanced practices.
 
 ## Some features
 
@@ -34,6 +34,9 @@ Domain-Driven Design (DDD) is a software development methodology that centers th
 - Can be excessive for simple or small-scale projects where the domain is straightforward
 
 DDD is best suited for complex domains where business logic is central to the application. For simpler projects, the overhead of DDD may outweigh its benefits.
+
+Read more in my technical articles:
+- [Understanding Ubiquitous Language in Domain-Driven Design: A Real-World Insurance Example](https://yurimelo.substack.com/p/understanding-ubiquitous-language)
 
 ## Recommended Reads
 Read about [Exception Handling](/docs/exception-handling-middleware.md)
