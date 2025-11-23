@@ -2,6 +2,8 @@ namespace DomainDrivenDesignInsurance.Domain.Exceptions;
 
 public class HighClaimsRatioException : Exception
 {
+    public string PolicyNumber { get; init; } = string.Empty;
+    public double ClaimsRatio { get; init; }
     public HighClaimsRatioException()
     {
     }
