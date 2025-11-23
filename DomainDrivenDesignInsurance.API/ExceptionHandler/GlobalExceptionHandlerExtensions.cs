@@ -12,6 +12,7 @@ public static class GlobalExceptionHandlerExtensions
         service.AddExceptionHandler<PremiumCalculationViolationExceptionHandler>();
         service.AddExceptionHandler<EmptyCoverageExceptionHandler>();
         service.AddExceptionHandler<ForbiddenExceptionHandler>();
+        service.AddExceptionHandler<HighClaimsRatioExceptionHandler>();
         service.AddExceptionHandler<GlobalExceptionHandler>();
         return service;
     }
