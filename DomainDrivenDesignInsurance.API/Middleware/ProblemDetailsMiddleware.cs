@@ -48,18 +48,6 @@ public class ProblemDetailsMiddleware
                     ["key"] = notFoundEx.Key
                 }
             },
-            BusinessRuleViolationException businessEx => new ProblemDetails
-            {
-                Status = StatusCodes.Status422UnprocessableEntity,
-                Title = "Business rule violation",
-                Detail = businessEx.Message,
-                Type = "https://tools.ietf.org/html/rfc4918#section-11.2",
-                Instance = context.Request.Path,
-                Extensions =
-                {
-                    ["rule"] = businessEx.Rule
-                }
-            },
             _ => new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,

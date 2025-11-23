@@ -12,6 +12,9 @@ This project demonstrates how to apply DDD concepts to model complex business lo
 - Aggregates, entities, and value objects tailored to insurance scenarios
 - Sample code illustrating bounded contexts and domain events
 
+## Read
+Read about [Exception Handling](/docs/exception-handling-middleware.md)
+
 ## Getting Started
 
 Clone the repository and review the source code to explore DDD patterns in practice. The project is organized to highlight key architectural decisions and best practices.

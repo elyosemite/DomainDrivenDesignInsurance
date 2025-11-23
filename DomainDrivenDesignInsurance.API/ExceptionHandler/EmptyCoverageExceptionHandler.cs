@@ -1,28 +1,26 @@
+using DomainDrivenDesignInsurance.Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DomainDrivenDesignInsurance.API.ExceptionHandler;
 
-public sealed class GlobalExceptionHandler : IExceptionHandler
+public sealed class EmptyCoverageExceptionHandler : IExceptionHandler
 {
-    private readonly ILogger<GlobalExceptionHandler> _logger;
-
-    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
-    {
-        _logger = logger;
-    }
-
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
         CancellationToken cancellationToken)
     {
-        _logger.LogError(exception, "An unhandled exception occurred. {Mesage}", exception.Message);
+        if (exception is not EmptyCoverageException emptyCoverageException)
+        {
+            return false;
+        }
 
         var problemDetails = new ProblemDetails
         {
-            Title = "Server error",
-            Status = StatusCodes.Status500InternalServerError
+            Title = "Empty coverage error",
+            Status = StatusCodes.Status400BadRequest,
+            Detail = emptyCoverageException.Message
         };
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
